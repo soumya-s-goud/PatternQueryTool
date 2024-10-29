@@ -1,0 +1,3 @@
+1000,myPattern,src/patterns/Functional.pat,true
+2000,anotherPattern,src/patterns/Another.pat,false
+3000,thirdPattern,src/patterns/Third.pat,true

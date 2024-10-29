@@ -1,0 +1,11 @@
+# Eclipse specific files 
+.metadata/ 
+.classpath 
+.project 
+bin/ 
+target/ 
+*.class 
+*.jar 
+*.log 
+*.tmp 
+*.swp 
