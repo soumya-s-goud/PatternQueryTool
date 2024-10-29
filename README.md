@@ -4,7 +4,25 @@ This project manages pattern call tuples, allowing users to query and manipulate
 
 ## Project Structure
 
-project-root │ ├── src │ └── com │ └── homework │ └── patternquerytool │ ├── PatternCall.java # Class representing a pattern call │ ├── PatternCallRepository.java # Repository for managing pattern calls │ ├── PatternCallQueryService.java # Service for querying pattern calls │ └── Main.java # Main class for running the application │ ├── test │ └── com │ └── homework │ └── patternquerytool │ ├── PatternCallTest.java # Unit tests for PatternCall class │ ├── PatternCallRepositoryTest.java # Unit tests for PatternCallRepository class │ └── PatternCallQueryServiceTest.java # Unit tests for PatternCallQueryService class │ └── resources └── valid_file.txt # Sample valid file for testing │ └── pom.xml # Maven Project Object Model file
+project-root 
+├── src 
+│ └── com 
+│     └── homework 
+│          └── patternquerytool 
+│              ├── PatternCall.java # Class representing a pattern call 
+│              ├── PatternCallRepository.java # Repository for managing pattern calls 
+│              ├── PatternCallQueryService.java # Service for querying pattern calls 
+│              └── Main.java # Main class for running the application 
+├── test 
+│   └── com 
+│   │    └── homework 
+│   │       └── patternquerytool 
+│   │           ├── PatternCallTest.java # Unit tests for PatternCall class
+│   │           ├── PatternCallRepositoryTest.java # Unit tests for PatternCallRepository class
+│   │              └── PatternCallQueryServiceTest.java # Unit tests for PatternCallQueryService class 
+│   └── resources 
+│       └── valid_file.txt # Sample valid file for testing 
+└── pom.xml # Maven Project Object Model file
 
 ## Requirements
 - JDK 17
@@ -13,11 +31,10 @@ project-root │ ├── src │ └── com │ └── homework │ └�
 - Mockito 5.14.0
 
 ## Installation
-1. Clone the repository/ Unzip the package
-    \`\`\`bash
-    git clone https://github.com/soumya-s-goud/pattern-query-tool.git
+1. Clone the repository/ Unzip the package **Software_Development_Task.zip**
+    git clone https://github.com/soumya-s-goud/PatternQueryTool.git
+
     cd pattern-query-tool
-    \`\`\`
 2. Navigate to the project directory.
 
 ## Build and Run

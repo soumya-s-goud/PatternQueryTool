@@ -1,2 +1,0 @@
-42,myPattern,src/patterns/Functional.pat,false
-43,anotherPattern,src/patterns/Another.pat,true
