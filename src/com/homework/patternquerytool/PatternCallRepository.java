@@ -148,8 +148,6 @@ public class PatternCallRepository {
 					PatternCall patternCall = new PatternCall(id, name, patternFile, isActive);
 					addPatternCall(patternCall); // This will add the patternCall only if ID is unique
 
-					// Print the newly added pattern call
-					System.out.println("Added PatternCall: " + patternCall);
 				}
 			} catch (IllegalArgumentException e) {
 				// Handle the exception (could log or simply ignore it)

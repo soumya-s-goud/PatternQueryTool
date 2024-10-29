@@ -41,7 +41,9 @@ Clone the repository/ Unzip the package Software_Development_Task.zip
 
 
  Navigate to the project directory.
+    ```bash 
     cd pattern-query-tool
+    ```
 
 ## Build and Run
 

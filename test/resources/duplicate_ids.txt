@@ -1,2 +1,2 @@
 42,myPattern,src/patterns/Functional.pat,true
-42,myPatternDuplicate,src/patterns/Duplicate.pat,false, false
+42,myPatternDuplicate,src/patterns/Duplicate.pat,false

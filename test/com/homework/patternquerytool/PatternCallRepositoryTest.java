@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -171,17 +170,14 @@ public class PatternCallRepositoryTest {
 	 */
 	@Test
 	public void testReadFromFile_MultiplePatterns() throws IOException {
-		Path filePath = Path.of("test/resources/multiple_patterns.txt");
-		Files.writeString(filePath,
-				"1000,myPattern,src/patterns/Functional.pat,true\n"
-						+ "2000,anotherPattern,src/patterns/Another.pat,false\n"
-						+ "3000,thirdPattern,src/patterns/Third.pat,true",
-				StandardOpenOption.CREATE);
+	    // The file should already exist and contain valid pattern data
+	    Path filePath = Path.of("test/resources/multiple_patterns.txt");
+	    
+	    // Read from the existing file
+	    repository.readFromFile(filePath.toString());
 
-		repository.readFromFile(filePath.toString());
-
-		List<PatternCall> patterns = repository.getPatternCalls();
-		assertEquals(3, patterns.size());
+	    List<PatternCall> patterns = repository.getPatternCalls();
+	    assertEquals(3, patterns.size(), "Expected 3 patterns in the repository.");
 	}
 
 	/**
@@ -189,12 +185,13 @@ public class PatternCallRepositoryTest {
 	 */
 	@Test
 	public void testReadFromFile_EmptyFile() throws IOException {
-		Path filePath = Path.of("test/resources/empty_file.txt");
-		Files.writeString(filePath, "", StandardOpenOption.CREATE);
+	    // The file should already exist and be empty
+	    Path filePath = Path.of("test/resources/empty_file.txt");
 
-		repository.readFromFile(filePath.toString());
+	    // Read from the existing empty file
+	    repository.readFromFile(filePath.toString());
 
-		assertTrue(repository.getPatternCalls().isEmpty(), "Expected no patterns in the repository for an empty file.");
+	    assertTrue(repository.getPatternCalls().isEmpty(), "Expected no patterns in the repository for an empty file.");
 	}
 
 	/**
@@ -202,12 +199,13 @@ public class PatternCallRepositoryTest {
 	 */
 	@Test
 	public void testReadFromFile_InvalidFileFormat() throws IOException {
-		Path filePath = Path.of("test/resources/invalid_file.txt");
-		Files.writeString(filePath, "Invalid,Data,Format", StandardOpenOption.CREATE);
+	    // The file should already exist and contain invalid format data
+	    Path filePath = Path.of("test/resources/invalid_file.txt");
 
-		repository.readFromFile(filePath.toString());
+	    // Read from the existing file with invalid format
+	    repository.readFromFile(filePath.toString());
 
-		assertTrue(repository.getPatternCalls().isEmpty(), "Expected no patterns for invalid file format.");
+	    assertTrue(repository.getPatternCalls().isEmpty(), "Expected no patterns for invalid file format.");
 	}
 
 	/**
@@ -215,16 +213,13 @@ public class PatternCallRepositoryTest {
 	 */
 	@Test
 	public void testReadFromFile_LargeFile() throws IOException {
-		Path filePath = Path.of("test/resources/large_file.txt");
-		StringBuilder data = new StringBuilder();
-		for (int i = 1; i <= 10000; i++) {
-			data.append(i).append(",pattern").append(i).append(",src/patterns/pattern").append(i).append(".pat,true\n");
-		}
-		Files.writeString(filePath, data.toString(), StandardOpenOption.CREATE);
+	    // The file should already exist and contain a large number of valid pattern entries
+	    Path filePath = Path.of("test/resources/large_file.txt");
 
-		repository.readFromFile(filePath.toString());
+	    // Read from the existing large file
+	    repository.readFromFile(filePath.toString());
 
-		assertEquals(10000, repository.getPatternCalls().size(), "Expected 10,000 patterns in the repository.");
+	    assertEquals(10000, repository.getPatternCalls().size(), "Expected 10,000 patterns in the repository.");
 	}
 
 	/**
@@ -232,13 +227,13 @@ public class PatternCallRepositoryTest {
 	 */
 	@Test
 	public void testReadFromFile_DuplicateIDs() throws IOException {
-		Path filePath = Path.of("test/resources/duplicate_ids.txt");
-		Files.writeString(filePath, "42,myPattern,src/patterns/Functional.pat,true\n"
-				+ "42,myPatternDuplicate,src/patterns/Duplicate.pat,false", StandardOpenOption.CREATE);
+	    // The file should already exist and contain duplicate IDs
+	    Path filePath = Path.of("test/resources/duplicate_ids.txt");
 
-		repository.readFromFile(filePath.toString());
+	    // Read from the existing file with duplicate IDs
+	    repository.readFromFile(filePath.toString());
 
-		assertEquals(1, repository.getPatternCalls().size(), "Expected only one entry for duplicate ID.");
+	    assertEquals(1, repository.getPatternCalls().size(), "Expected only one entry for duplicate ID.");
 	}
 
 	/**
@@ -246,13 +241,14 @@ public class PatternCallRepositoryTest {
 	 */
 	@Test
 	public void testReadFromFile_InvalidBooleanValue() throws IOException {
-		Path filePath = Path.of("test/resources/invalid_boolean_value.txt");
-		Files.writeString(filePath, "42,myPattern,src/patterns/Functional.pat,notBoolean", StandardOpenOption.CREATE);
+	    // The file should already exist and contain a non-boolean value
+	    Path filePath = Path.of("test/resources/invalid_boolean_value.txt");
 
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			repository.readFromFile(filePath.toString());
-		});
-		assertTrue(exception.getMessage().contains("notBoolean"));
+	    // Expect an exception to be thrown when reading from this file
+	    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+	        repository.readFromFile(filePath.toString());
+	    });
+	    assertTrue(exception.getMessage().contains("notBoolean"), "Expected exception message to contain 'notBoolean'.");
 	}
 
 	/**
